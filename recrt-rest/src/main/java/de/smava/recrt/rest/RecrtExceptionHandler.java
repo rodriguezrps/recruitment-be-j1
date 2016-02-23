@@ -1,7 +1,7 @@
 package de.smava.recrt.rest;
 
 
-import de.smava.recrt.service.RecrtServiceException;
+import de.smava.recrt.exception.RecrtServiceException;
 import de.smava.recrt.service.resource.ErrorResource;
 import de.smava.recrt.service.resource.FieldErrorResource;
 import org.springframework.http.HttpHeaders;
@@ -34,7 +34,7 @@ public class RecrtExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleServiceException(RuntimeException e, WebRequest request) {
 
         RecrtServiceException recrtEx = (RecrtServiceException) e;
-        ErrorResource error = recrtEx.getErrorResource();
+        Error error = recrtEx.getError();
 
         HttpStatus httpStatus;
         if (error!=null){

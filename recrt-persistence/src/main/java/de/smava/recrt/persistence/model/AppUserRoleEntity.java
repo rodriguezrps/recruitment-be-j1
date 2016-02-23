@@ -1,39 +1,38 @@
 package de.smava.recrt.persistence.model;
 
+import de.smava.recrt.model.AppUser;
+import de.smava.recrt.model.AppUserRole;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-/**
- * Created by pvitic on 04.12.15.
- */
 @Entity
 @Table(name = "app_user_role")
-public class AppUserRole {
+public class AppUserRoleEntity implements AppUserRole<AppUserEntity> {
 
     @Id
     @GenericGenerator(name="id_generator" , strategy="increment")
     @GeneratedValue(generator="id_generator")
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "app_user_id")
-    private AppUser appUser;
+    private AppUserEntity appUser;
 
     @Column(name = "name")
     private String name;
 
-    public AppUserRole() {}
+    public AppUserRoleEntity() {}
 
-    public AppUserRole(long id) {
+    public AppUserRoleEntity(long id) {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -45,11 +44,11 @@ public class AppUserRole {
         this.name = name;
     }
 
-    public AppUser getAppUser() {
+    public AppUserEntity getAppUser() {
         return appUser;
     }
 
-    public void setAppUser(AppUser appUser) {
+    public void setAppUser(AppUserEntity appUser) {
         this.appUser = appUser;
     }
 }

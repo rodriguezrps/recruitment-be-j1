@@ -1,21 +1,13 @@
-package de.smava.recrt.persistence.model;
+package de.smava.recrt.rest.model;
 
-import javax.persistence.*;
+import de.smava.recrt.model.AppUser;
+import de.smava.recrt.model.BankAccount;
 
-@Entity
-@Table(name = "bank_account")
-public class BankAccount {
+public class BankAccountResource extends DefaultResource implements BankAccount {
 
-    @Id
-    @Column(name = "iban")
     String iban;
 
-    @Column(name = "bic")
     String bic;
-
-    @ManyToOne
-    @JoinColumn(name = "app_user_id")
-    private AppUser appUser;
 
     public String getIban() {
         return iban;
@@ -33,11 +25,13 @@ public class BankAccount {
         this.bic = bic;
     }
 
+    @Override
     public AppUser getAppUser() {
-        return appUser;
+        return null;
     }
 
+    @Override
     public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
+
     }
 }

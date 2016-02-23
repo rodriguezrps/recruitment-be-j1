@@ -1,4 +1,4 @@
-package de.smava.recrt.service.resource;
+package de.smava.recrt.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

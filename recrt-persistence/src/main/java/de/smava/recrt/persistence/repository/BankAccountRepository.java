@@ -1,14 +1,14 @@
 package de.smava.recrt.persistence.repository;
 
-import de.smava.recrt.persistence.model.AppUser;
-import de.smava.recrt.persistence.model.BankAccount;
+import de.smava.recrt.persistence.model.AppUserEntity;
+import de.smava.recrt.persistence.model.BankAccountEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Transactional
-public interface BankAccountRepository extends JpaRepository<BankAccount, Long> {
+public interface BankAccountRepository extends JpaRepository<BankAccountEntity, Long> {
 
-    List<BankAccount> findByAppUser(AppUser appUser);
+    List<BankAccountEntity> findByAppUser(AppUserEntity appUser);
 }

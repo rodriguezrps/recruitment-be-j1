@@ -1,10 +1,8 @@
 package de.smava.recrt.rest;
 
-import de.smava.recrt.service.AppUserService;
+import de.smava.recrt.exception.RecrtServiceException;
 import de.smava.recrt.service.BankAccountProducer;
 import de.smava.recrt.service.BankAccountService;
-import de.smava.recrt.service.RecrtServiceException;
-import de.smava.recrt.service.resource.AppUserResource;
 import de.smava.recrt.service.resource.BankAccountResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;

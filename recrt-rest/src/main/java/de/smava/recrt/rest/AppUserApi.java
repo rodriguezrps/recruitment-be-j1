@@ -1,7 +1,8 @@
 package de.smava.recrt.rest;
 
+import de.smava.recrt.exception.RecrtServiceException;
+import de.smava.recrt.model.AppUser;
 import de.smava.recrt.service.AppUserService;
-import de.smava.recrt.service.RecrtServiceException;
 import de.smava.recrt.service.resource.AppUserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -34,7 +35,7 @@ public class AppUserApi {
             @RequestParam(value = "getCount", defaultValue = "false") final Boolean getCount)
             throws RecrtServiceException {
 
-        List<AppUserResource> users = appUserService.getAllAppUsers();
+        List<? extends AppUser> users = appUserService.getAllAppUsers();
 
         if (getCount) {
             getCount(users);

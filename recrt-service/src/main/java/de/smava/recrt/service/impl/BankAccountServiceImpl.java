@@ -1,14 +1,12 @@
 package de.smava.recrt.service.impl;
 
-import de.smava.recrt.persistence.model.AppUser;
-import de.smava.recrt.persistence.model.BankAccount;
+import de.smava.recrt.exception.RecrtServiceException;
+import de.smava.recrt.persistence.model.AppUserEntity;
+import de.smava.recrt.persistence.model.BankAccountEntity;
 import de.smava.recrt.persistence.repository.AppUserRepository;
 import de.smava.recrt.persistence.repository.BankAccountRepository;
 import de.smava.recrt.service.BankAccountProducer;
 import de.smava.recrt.service.BankAccountService;
-import de.smava.recrt.service.RecrtServiceException;
-import de.smava.recrt.service.resource.AppUserResource;
-import de.smava.recrt.service.resource.BankAccountResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BankAccountServiceImpl implements BankAccountService {
+public class BankAccountServiceImpl implements BankAccountService<BankAccountEntity> {
 
     @Autowired
     private AppUserRepository appUserRepository;
@@ -30,27 +28,17 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     @Transactional
-    public List<BankAccountResource> getByAppUser(String appUserName) throws RecrtServiceException {
-        List<BankAccountResource> result = new ArrayList<>();
-        AppUser user = appUserRepository.findByUsername(appUserName);
-
+    public List<BankAccountEntity> getByAppUser(String appUserName) throws RecrtServiceException {
+        AppUserEntity user = appUserRepository.findByUsername(appUserName);
         if (user!=null){
-            List<BankAccount> accounts = bankAccountRepository.findByAppUser(user);
-            if (accounts!=null && !accounts.isEmpty()){
-                for (BankAccount account : accounts){
-                    BankAccountResource accountResource = new BankAccountResource();
-                    accountResource.setIban(account.getIban());
-                    accountResource.setBic(account.getBic());
-                    result.add(accountResource);
-                }
-            }
+            return bankAccountRepository.findByAppUser(user);
         }
 
-        return result;
+        return new ArrayList<>();
     }
 
     @Override
-    public BankAccountResource create(BankAccountResource account) throws RecrtServiceException {
+    public BankAccountEntity create(BankAccountEntity account) throws RecrtServiceException {
         bankAccountProducer.produce(account);
         return null;
     }

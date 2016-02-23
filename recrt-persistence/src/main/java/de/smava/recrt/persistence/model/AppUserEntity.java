@@ -1,5 +1,6 @@
 package de.smava.recrt.persistence.model;
 
+import de.smava.recrt.model.AppUser;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,12 +12,12 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "app_user")
-public class AppUser {
+public class AppUserEntity implements AppUser<AppUserRoleEntity, BankAccountEntity> {
 
 	@Id
     @GenericGenerator(name="id_generator" , strategy="increment")
     @GeneratedValue(generator="id_generator")
-    private long id;
+    private Long id;
 
     private String email;
 
@@ -25,14 +26,14 @@ public class AppUser {
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "appUser")
-    private Set<AppUserRole> appUserRoles;
+    private Set<AppUserRoleEntity> appUserRoles;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser")
-    private Set<BankAccount> bankAccounts;
+    private Set<BankAccountEntity> bankAccounts;
 
-    public AppUser() {}
+    public AppUserEntity() {}
 
-    public AppUser(long id) {
+    public AppUserEntity(long id) {
         super();
         this.id = id;
     }
@@ -45,11 +46,11 @@ public class AppUser {
         this.username = username;
     }
 
-	public long getId() {
+	public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,19 +70,19 @@ public class AppUser {
         this.password = password;
     }
 
-    public Set<AppUserRole> getAppUserRoles() {
+    public Set<AppUserRoleEntity> getAppUserRoles() {
         return appUserRoles;
     }
 
-    public void setAppUserRoles(Set<AppUserRole> appUserRoles) {
+    public void setAppUserRoles(Set<AppUserRoleEntity> appUserRoles) {
         this.appUserRoles = appUserRoles;
     }
 
-    public Set<BankAccount> getBankAccounts() {
+    public Set<BankAccountEntity> getBankAccounts() {
         return bankAccounts;
     }
 
-    public void setBankAccounts(Set<BankAccount> bankAccounts) {
+    public void setBankAccounts(Set<BankAccountEntity> bankAccounts) {
         this.bankAccounts = bankAccounts;
     }
 }
