@@ -14,8 +14,17 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
             <groupId>de.smava.recrt</groupId>
             <artifactId>recrt-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.smava.recrt</groupId>
+            <artifactId>recrt-asynch</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

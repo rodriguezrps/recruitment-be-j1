@@ -17,16 +17,37 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <servlet.api.version>3.0.1</servlet.api.version>
         <servlet.jstl.version>1.2</servlet.jstl.version>
-        <spring.version>4.0.9.RELEASE</spring.version>
+        <spring.version>4.1.0.RELEASE</spring.version>
         <spring.security.version>3.2.8.RELEASE</spring.security.version>
         <spring.security.oauth.version>2.0.8.RELEASE</spring.security.oauth.version>
         <spring.data.version>1.8.2.RELEASE</spring.data.version>
         <hibernate.version>4.2.6.Final</hibernate.version>
+        <activemq.version>5.9.0</activemq.version>
         <h2.version>1.4.187</h2.version>
         <jackson.databind.version>2.3.2</jackson.databind.version>
         <slf4j-log4j12.version>1.7.12</slf4j-log4j12.version>
         <junit.version>4.9</junit.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-all</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>

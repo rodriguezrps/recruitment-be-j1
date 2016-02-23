@@ -1,5 +1,6 @@
 package de.smava.recrt.rest.config;
 
+import de.smava.recrt.jms.config.JmsConfig;
 import de.smava.recrt.persistence.config.PersistenceConfig;
 import de.smava.recrt.service.config.CachingConfig;
 import org.springframework.web.context.WebApplicationContext;
@@ -23,7 +24,7 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
     @Override
     protected WebApplicationContext createServletApplicationContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(SecurityConfig.class, WebMvcConfig.class, PersistenceConfig.class, CachingConfig.class);
+        context.register(SecurityConfig.class, WebMvcConfig.class, PersistenceConfig.class, CachingConfig.class, JmsConfig.class);
         return context;
     }
 
