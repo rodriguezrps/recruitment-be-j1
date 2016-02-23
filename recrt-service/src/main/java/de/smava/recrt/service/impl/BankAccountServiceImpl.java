@@ -26,9 +26,9 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     @Transactional
-    public List<BankAccountResource> getByAppUser(AppUserResource appUser) throws RecrtServiceException {
+    public List<BankAccountResource> getByAppUser(String appUserName) throws RecrtServiceException {
         List<BankAccountResource> result = new ArrayList<>();
-        AppUser user = appUserRepository.findOne(appUser.getId());
+        AppUser user = appUserRepository.findByUsername(appUserName);
 
         if (user!=null){
             List<BankAccount> accounts = bankAccountRepository.findByAppUser(user);
