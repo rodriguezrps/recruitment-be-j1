@@ -1,20 +1,22 @@
 package de.smava.recrt.rest.config;
 
-import de.smava.recrt.service.impl.CustomUserDetailsService;
+import de.smava.recrt.rest.security.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
-import org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Alternative authentication with header authorization token
@@ -24,56 +26,55 @@ import org.springframework.security.web.authentication.preauth.RequestHeaderAuth
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsService userDetailsService;
-    private PreAuthenticatedAuthenticationProvider preAuthenticatedProvider;
+    @Autowired
+    UserDetailsService userDetailsService;
 
-    public SecurityConfig() {
-        super();
-        userDetailsService = new CustomUserDetailsService();
-        UserDetailsByNameServiceWrapper<PreAuthenticatedAuthenticationToken> wrapper =
-                new UserDetailsByNameServiceWrapper<PreAuthenticatedAuthenticationToken>(userDetailsService);
+    @Autowired
+    LogoutSuccessHandler logoutSuccessHandler;
 
-        preAuthenticatedProvider = new PreAuthenticatedAuthenticationProvider();
-        preAuthenticatedProvider.setPreAuthenticatedUserDetailsService(wrapper);
+    @Autowired
+    AccessDeniedHandler accessDeniedHandler;
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
+        return authenticationProvider;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-    
-    @Override
-    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.authenticationProvider(preAuthenticatedProvider);
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
     }
 
     @Override
-    public void configure(WebSecurity webSecurity) throws Exception {
-        webSecurity.ignoring().antMatchers("/resources/**");
-    }
-
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        RequestHeaderAuthenticationFilter siteMinderFilter = new RequestHeaderAuthenticationFilter();
-        siteMinderFilter.setAuthenticationManager(authenticationManager());
-
-        httpSecurity
-                .addFilter(siteMinderFilter)
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login","/login.request","/logout").permitAll()
-                .anyRequest().hasRole("RoleEmployee")
+                .antMatchers("/").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
+                .antMatchers("/index.html").permitAll()
+                .antMatchers("/rest/login").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login.request")
-                .loginProcessingUrl("/login")
-                .failureUrl("/login.request?error")
-                .permitAll()
+                .authenticationProvider(authenticationProvider())
+                .exceptionHandling()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
                 .permitAll()
-                .logoutSuccessUrl("/login.request")
-        ;
+                .logoutRequestMatcher(new AntPathRequestMatcher("/rest/login", "DELETE"))
+                .logoutSuccessHandler(logoutSuccessHandler)
+                .and()
+                .sessionManagement()
+                .maximumSessions(1);
+
+        http.getConfigurer(ExceptionHandlingConfigurer.class)
+                .accessDeniedHandler(accessDeniedHandler);
     }
 }

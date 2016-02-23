@@ -23,7 +23,7 @@ public class AdvisorServiceImpl implements AdvisorService {
     @Override
     public List<AdvisorResource> getAllAdvisors() throws RecrtServiceException {
         List<AdvisorResource> result = new ArrayList<>();
-        List<AppUser> appUsers = appUserRepository.findAllUsers();
+        List<AppUser> appUsers = appUserRepository.findAll();
         for (AppUser appUser : appUsers){
             AdvisorResource advisor = new AdvisorResource();
             advisor.setId(appUser.getId());

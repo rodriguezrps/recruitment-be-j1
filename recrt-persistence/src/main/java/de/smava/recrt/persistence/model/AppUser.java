@@ -24,7 +24,7 @@ public class AppUser {
 
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "appUser")
     private Set<AppUserRole> appUserRoles;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser")

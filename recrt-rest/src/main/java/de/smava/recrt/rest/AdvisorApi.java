@@ -20,7 +20,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  *
  */
 @RestController
-@RequestMapping(value = "/recrt/advisors", produces = {APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/rest/advisors", produces = {APPLICATION_JSON_VALUE})
 public class AdvisorApi {
 
     @Autowired
