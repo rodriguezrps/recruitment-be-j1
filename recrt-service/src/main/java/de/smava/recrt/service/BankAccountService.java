@@ -9,4 +9,6 @@ import java.util.List;
 public interface BankAccountService {
 
     List<BankAccountResource> getByAppUser(String appUserName) throws RecrtServiceException;
+
+    BankAccountResource create(BankAccountResource account) throws RecrtServiceException;
 }

@@ -3,19 +3,20 @@ package de.smava.recrt.jms.config;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
+import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.destination.DynamicDestinationResolver;
 
 import javax.jms.Session;
 
-/**
- * Created by paul on 21/12/14.
- */
 @Configuration
 @EnableJms
+@ComponentScan("de.smava.recrt.jms")
 public class JmsConfig {
 
     @Bean
@@ -27,6 +28,7 @@ public class JmsConfig {
         template.setDeliveryPersistent(false);
         template.setTimeToLive(60000);
         template.setSessionAcknowledgeMode(Session.AUTO_ACKNOWLEDGE);
+        template.setMessageConverter(getMessageConverter());
         return template;
     }
 
@@ -37,6 +39,7 @@ public class JmsConfig {
         factory.setPubSubDomain(true);
         factory.setDestinationResolver(new DynamicDestinationResolver());
         factory.setConcurrency("1");
+        factory.setMessageConverter(getMessageConverter());
         return factory;
     }
 
@@ -44,6 +47,12 @@ public class JmsConfig {
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
         factory.setBrokerURL("vm://localhost");
         return factory;
+    }
+
+    private MessageConverter getMessageConverter(){
+        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        converter.setTypeIdPropertyName("JMSType");
+        return converter;
     }
 
 }

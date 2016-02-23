@@ -4,6 +4,7 @@ import de.smava.recrt.persistence.model.AppUser;
 import de.smava.recrt.persistence.model.BankAccount;
 import de.smava.recrt.persistence.repository.AppUserRepository;
 import de.smava.recrt.persistence.repository.BankAccountRepository;
+import de.smava.recrt.service.BankAccountProducer;
 import de.smava.recrt.service.BankAccountService;
 import de.smava.recrt.service.RecrtServiceException;
 import de.smava.recrt.service.resource.AppUserResource;
@@ -23,6 +24,9 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Autowired
     private BankAccountRepository bankAccountRepository;
+
+    @Autowired
+    private BankAccountProducer bankAccountProducer;
 
     @Override
     @Transactional
@@ -44,4 +48,11 @@ public class BankAccountServiceImpl implements BankAccountService {
 
         return result;
     }
+
+    @Override
+    public BankAccountResource create(BankAccountResource account) throws RecrtServiceException {
+        bankAccountProducer.produce(account);
+        return null;
+    }
+    
 }

@@ -1,11 +1,11 @@
 package de.smava.recrt.service;
 
-import de.smava.recrt.persistence.model.BankAccount;
+import de.smava.recrt.service.resource.BankAccountResource;
 
 import java.util.List;
 
 public interface BankAccountProducer {
 
-    void produce(List<? extends BankAccount> accounts) throws RecrtServiceException;
+    void produce(BankAccountResource account) throws RecrtServiceException;
 
 }

@@ -1,6 +1,7 @@
 package de.smava.recrt.rest;
 
 import de.smava.recrt.service.AppUserService;
+import de.smava.recrt.service.BankAccountProducer;
 import de.smava.recrt.service.BankAccountService;
 import de.smava.recrt.service.RecrtServiceException;
 import de.smava.recrt.service.resource.AppUserResource;
@@ -9,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +23,9 @@ public class BankAccountApi {
     @Autowired
     private BankAccountService bankAccountService;
 
+    @Autowired
+    private BankAccountProducer bankAccountProducer;
+
     @Secured({"ROLE_USER"})
     @RequestMapping(method = RequestMethod.GET)
     public List<BankAccountResource> getAll()
@@ -36,4 +37,12 @@ public class BankAccountApi {
         return bankAccountService.getByAppUser(name);
 
     }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public void create(@RequestBody BankAccountResource account)
+            throws RecrtServiceException {
+        bankAccountProducer.produce(account);
+    }
+
+
 }
