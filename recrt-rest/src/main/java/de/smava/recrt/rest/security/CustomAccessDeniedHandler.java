@@ -14,8 +14,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
-        if(!response.isCommitted()) {
-            response.sendError(403, e.getMessage());
-        }
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().flush();
     }
 }

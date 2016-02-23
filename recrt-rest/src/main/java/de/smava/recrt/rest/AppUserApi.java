@@ -1,8 +1,8 @@
 package de.smava.recrt.rest;
 
-import de.smava.recrt.service.AdvisorService;
+import de.smava.recrt.service.AppUserService;
 import de.smava.recrt.service.RecrtServiceException;
-import de.smava.recrt.service.resource.AdvisorResource;
+import de.smava.recrt.service.resource.AppUserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,15 +16,12 @@ import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-/**
- *
- */
 @RestController
-@RequestMapping(value = "/rest/advisors", produces = {APPLICATION_JSON_VALUE})
-public class AdvisorApi {
+@RequestMapping(value = "/rest/users", produces = {APPLICATION_JSON_VALUE})
+public class AppUserApi {
 
     @Autowired
-    private AdvisorService advisorService;
+    private AppUserService appUserService;
 
     /*@InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -33,21 +30,27 @@ public class AdvisorApi {
 
     @Secured({"ROLE_ADMIN"})
     @RequestMapping(method = RequestMethod.GET)
-    public List<AdvisorResource> get(
-            @RequestParam(required = false, value = "hasGroup") final Boolean hasGroup)
+    public List<AppUserResource> getAll(
+            @RequestParam(value = "getCount", defaultValue = "false") final Boolean getCount)
             throws RecrtServiceException {
 
-        List<AdvisorResource> advisors = advisorService.getAllAdvisors();
+        List<AppUserResource> users = appUserService.getAllAppUsers();
 
-        if (advisors !=null && advisors.size() > 0){
+        if (getCount) {
+            getCount(users);
+        }
+
+        return users;
+    }
+
+
+    private void getCount(List<AppUserResource> users){
+        if (users !=null && users.size() > 0){
             Map<String, Object> metaData = new HashMap<>();
-            metaData.put("count", advisors.size());
-            for (AdvisorResource advisor : advisors){
+            metaData.put("count", users.size());
+            for (AppUserResource advisor : users){
                 advisor.setAdditionalInfo(metaData);
             }
         }
-
-        return advisors;
     }
-
 }

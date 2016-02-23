@@ -14,13 +14,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-/**
- * Alternative authentication with header authorization token
- */
 @Configuration
 @EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -34,6 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     AccessDeniedHandler accessDeniedHandler;
+
+    @Autowired
+    AuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -63,18 +64,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rest/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .authenticationProvider(authenticationProvider())
-                .exceptionHandling()
-                .and()
                 .logout()
                 .permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/rest/login", "DELETE"))
                 .logoutSuccessHandler(logoutSuccessHandler)
                 .and()
-                .sessionManagement()
-                .maximumSessions(1);
-
-        http.getConfigurer(ExceptionHandlingConfigurer.class)
-                .accessDeniedHandler(accessDeniedHandler);
+                .authenticationProvider(authenticationProvider())
+                .getConfigurer(ExceptionHandlingConfigurer.class)
+                .accessDeniedHandler(accessDeniedHandler)
+                .authenticationEntryPoint(authenticationEntryPoint);
     }
 }

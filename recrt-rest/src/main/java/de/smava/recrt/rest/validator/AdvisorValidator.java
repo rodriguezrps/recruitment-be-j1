@@ -1,6 +1,6 @@
 package de.smava.recrt.rest.validator;
 
-import de.smava.recrt.service.resource.AdvisorResource;
+import de.smava.recrt.service.resource.AppUserResource;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -11,7 +11,7 @@ public class AdvisorValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return AdvisorResource.class.equals(clazz);
+        return AppUserResource.class.equals(clazz);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class AdvisorValidator implements Validator {
 
         //ValidationUtils.rejectIfEmpty(e, "id", "id.empty");
 
-        //AdvisorResource p = (AdvisorResource) target;
+        //AppUserResource p = (AppUserResource) target;
 
         //perform additional checks
         //if name already exists or ?

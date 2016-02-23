@@ -28,6 +28,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (appUser == null){
             throw new UsernameNotFoundException(username);
         }
+        List<GrantedAuthority> authorities = getRoles(appUser);
+        return new User(appUser.getUsername(), appUser.getPassword(), authorities);
+    }
+
+    private List<GrantedAuthority> getRoles(AppUser appUser){
         List<GrantedAuthority> authorities = new ArrayList<>();
         Set<AppUserRole> roles = appUser.getAppUserRoles();
         if (roles !=null && !roles.isEmpty()){
@@ -36,7 +41,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 authorities.add(authority);
             }
         }
-
-        return new User(appUser.getUsername(), appUser.getPassword(), authorities);
+        return  authorities;
     }
 }
