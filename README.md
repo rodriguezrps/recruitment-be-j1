@@ -109,28 +109,33 @@ Then git clone the project to your development machine.
 To execute a task:
 
 1. Branch off the master using the following naming convention.
-[your initials]/task-[task number]
-For example if your name is John Doe, to execute task 1 create a branch with name **JD/task-1**
 
-1. Once you complete the implementation commit and push your changes to the remote repository with
-an appropriate commit message that describes your work.
+    [your initials]/task-[task number]
 
-1. Create a pull request and assign the administrator who provided you with the tasks for code review.
+    For example if your name is John Doe, to execute task 1, your branch name should be **JD/task-1**
+
+1. Once you complete the implementation, commit with an appropriate commit message that describes your work
+and push your changes to the remote repository.
+
+1. Create a pull request and assign the administrator, who provided you with the tasks, for code review.
 
 ## Tasks
 
 1. Currently the **create account API** executes synchronously. By using the available implementation and 
 only changing a single line of code convert this into an asynchronous call. 
-ETC: 15 mins.
+
+    ETC: 15 mins.
 
 1. By implementing a single line of code, introduce caching for the 
 **de.smava.recrt.service.AppUserRoleService.getByAppUser** service.
-ETC: 15 mins.
+
+    ETC: 15 mins.
 
 1. Provide a "GET http://localhost:8080/rest/users/[userName]/accounts" REST endpoint in the 
 **de.smava.recrt.rest.AppUserApi** implementation that gets the bank accounts that belong to a specific user. 
 The method should only be callable by a user who has the **ROLE_ADMIN** role.
-ETC: 20 mins.
+
+    ETC: 20 mins.
 
 1. Create a unit test for.....
 
