@@ -21,14 +21,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class BankAccountApi {
 
     @Autowired
-    @Qualifier("bankAccountJmsProducer")
-    private BankAccountService bankAccountAsynchService;
-
-    /**
-    @Autowired
     @Qualifier("bankAccountPersistenceService")
     private BankAccountService bankAccountService;
-     **/
+
 
     @Secured({"ROLE_USER"})
     @RequestMapping(method = RequestMethod.GET)
@@ -39,7 +34,7 @@ public class BankAccountApi {
 
         List<BankAccountResource> result = new ArrayList<>();
 
-        List<? extends BankAccount> bankAccountEntities = bankAccountAsynchService.getByAppUser(name);
+        List<? extends BankAccount> bankAccountEntities = bankAccountService.getByAppUser(name);
         for (BankAccount bankAccountEntity : bankAccountEntities){
             result.add(new BankAccountResource(bankAccountEntity));
         }
@@ -49,7 +44,7 @@ public class BankAccountApi {
     @Secured({"ROLE_ADMIN"})
     @RequestMapping(method = RequestMethod.POST)
     public BankAccountResource create(@RequestBody BankAccountResource account) throws RecrtServiceException {
-        BankAccount saved = bankAccountAsynchService.create(account);
+        BankAccount saved = bankAccountService.create(account);
         if (saved!=null){
             return new BankAccountResource(saved);
         }
