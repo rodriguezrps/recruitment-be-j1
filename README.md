@@ -101,7 +101,7 @@ POST http://localhost:8080/rest/accounts
 You will be asked to execute some of the tasks presented below. Each task suggests an estimated time for completion 
 ( **ETC** ).
 
-First examine the code to understand the project structure. For a proficient Java 4 Spring developer this phase
+First, examine the code to understand the project structure. For a proficient Java+Spring developer this phase
 should not require more than 20-30 minutes.
 
 Then git clone the project to your development machine.
