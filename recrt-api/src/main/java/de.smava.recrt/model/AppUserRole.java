@@ -1,16 +1,9 @@
 package de.smava.recrt.model;
 
-public interface AppUserRole<T extends AppUser> {
+public interface AppUserRole {
 
-    Long getId();
+    UserRole getRole();
 
-    void setId(Long id);
+    void setRole(UserRole role);
 
-    String getName();
-
-    void setName(String name);
-
-    T getAppUser();
-
-    void setAppUser(T appUser);
 }

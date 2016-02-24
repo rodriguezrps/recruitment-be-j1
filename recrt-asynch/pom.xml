@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>de.smava.recrt</groupId>
-            <artifactId>recrt-service</artifactId>
+            <artifactId>recrt-api</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

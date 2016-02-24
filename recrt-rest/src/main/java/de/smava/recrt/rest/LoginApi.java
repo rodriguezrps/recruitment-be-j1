@@ -1,6 +1,6 @@
 package de.smava.recrt.rest;
 
-import de.smava.recrt.service.resource.LoginResource;
+import de.smava.recrt.rest.model.LoginResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

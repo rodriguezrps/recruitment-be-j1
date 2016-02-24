@@ -5,18 +5,13 @@ package de.smava.recrt.exception;
  */
 public class RecrtServiceException extends RuntimeException {
 
-    private Error error;
+    private RecrtError error;
 
-    public RecrtServiceException(String message) {
-        super(message);
-    }
-
-    public RecrtServiceException(Error error) {
-        super(error.getMessage());
+    public RecrtServiceException(RecrtError error) {
         this.error = error;
     }
 
-    public Error getError() {
+    public RecrtError getError() {
         return error;
     }
 }

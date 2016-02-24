@@ -2,18 +2,17 @@ package de.smava.recrt.rest;
 
 import de.smava.recrt.exception.RecrtServiceException;
 import de.smava.recrt.model.AppUser;
+import de.smava.recrt.rest.model.AppUserResource;
 import de.smava.recrt.service.AppUserService;
-import de.smava.recrt.service.resource.AppUserResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -22,6 +21,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class AppUserApi {
 
     @Autowired
+    @Qualifier("appUserService")
     private AppUserService appUserService;
 
     /*@InitBinder
@@ -31,27 +31,16 @@ public class AppUserApi {
 
     @Secured({"ROLE_ADMIN"})
     @RequestMapping(method = RequestMethod.GET)
-    public List<AppUserResource> getAll(
-            @RequestParam(value = "getCount", defaultValue = "false") final Boolean getCount)
-            throws RecrtServiceException {
+    public List<AppUserResource> search() throws RecrtServiceException {
 
-        List<? extends AppUser> users = appUserService.getAllAppUsers();
+        List<AppUserResource> result = new ArrayList<>();
 
-        if (getCount) {
-            getCount(users);
+        List<? extends AppUser> userEntities = appUserService.getAll();
+        for(AppUser userEntity : userEntities){
+            result.add(new AppUserResource(userEntity));
         }
 
-        return users;
+        return result;
     }
 
-
-    private void getCount(List<AppUserResource> users){
-        if (users !=null && users.size() > 0){
-            Map<String, Object> metaData = new HashMap<>();
-            metaData.put("count", users.size());
-            for (AppUserResource advisor : users){
-                advisor.setAdditionalInfo(metaData);
-            }
-        }
-    }
 }

@@ -8,8 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Transactional
-public interface AppUserRepository extends JpaRepository<AppUserEntity, Long> {
-
-    AppUserEntity findByUsername(String username);
+public interface AppUserRepository extends JpaRepository<AppUserEntity, String> {
 
 }

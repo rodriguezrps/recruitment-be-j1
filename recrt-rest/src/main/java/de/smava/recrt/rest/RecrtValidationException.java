@@ -1,6 +1,6 @@
 package de.smava.recrt.rest;
 
-import de.smava.recrt.service.resource.ErrorResource;
+import de.smava.recrt.rest.model.ErrorResource;
 import org.springframework.validation.Errors;
 
 /**

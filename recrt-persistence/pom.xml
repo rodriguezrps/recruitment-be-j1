@@ -13,13 +13,8 @@
     <dependencies>
         <dependency>
             <groupId>de.smava.recrt</groupId>
-            <artifactId>rectrt-api</artifactId>
-            <version>0.01-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>de.smava.recrt</groupId>
-            <artifactId>rectrt-api</artifactId>
-            <version>0.01-SNAPSHOT</version>
+            <artifactId>recrt-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

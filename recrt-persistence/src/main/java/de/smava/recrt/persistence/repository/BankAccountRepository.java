@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional
-public interface BankAccountRepository extends JpaRepository<BankAccountEntity, Long> {
+public interface BankAccountRepository extends JpaRepository<BankAccountEntity, String> {
 
     List<BankAccountEntity> findByAppUser(AppUserEntity appUser);
 }

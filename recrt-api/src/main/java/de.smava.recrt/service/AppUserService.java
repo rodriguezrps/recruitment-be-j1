@@ -5,10 +5,10 @@ import de.smava.recrt.model.AppUser;
 
 import java.util.List;
 
-public interface AppUserService<T extends AppUser> {
+public interface AppUserService {
 
-    List<T> getAllAppUsers() throws RecrtServiceException;
+    List<? extends AppUser> getAll() throws RecrtServiceException;
 
-    T getByUsername(String username) throws RecrtServiceException;
+    AppUser get(String username) throws RecrtServiceException;
 
 }

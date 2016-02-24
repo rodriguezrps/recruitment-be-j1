@@ -2,6 +2,7 @@ package de.smava.recrt.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import de.smava.recrt.exception.RecrtError;
 
 import java.util.List;
 
@@ -10,22 +11,25 @@ import java.util.List;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ErrorResource {
+public class ErrorResource extends RecrtError {
 
-    private String code;
-    private String message;
     private List<FieldErrorResource> fieldErrors;
 
-    public ErrorResource() { }
-
-    public ErrorResource(String code, String message) {
-        this.code = code;
-        this.message = message;
+    public ErrorResource(){
+        super(422, "Validation error.");
     }
 
-    public String getCode() { return code; }
+    public ErrorResource(String message) {
+        super(422, message);
+    }
 
-    public void setCode(String code) { this.code = code; }
+    public ErrorResource(int code, String message) {
+        super(code, message);
+    }
+
+    public int getCode() { return code; }
+
+    public void setCode(int code) { this.code = code; }
 
     public String getMessage() { return message; }
 

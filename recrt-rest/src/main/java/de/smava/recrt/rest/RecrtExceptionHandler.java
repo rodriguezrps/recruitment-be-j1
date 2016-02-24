@@ -1,9 +1,10 @@
 package de.smava.recrt.rest;
 
 
+import de.smava.recrt.exception.RecrtError;
 import de.smava.recrt.exception.RecrtServiceException;
-import de.smava.recrt.service.resource.ErrorResource;
-import de.smava.recrt.service.resource.FieldErrorResource;
+import de.smava.recrt.rest.model.ErrorResource;
+import de.smava.recrt.rest.model.FieldErrorResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,7 +24,6 @@ import java.util.List;
 @ControllerAdvice
 public class RecrtExceptionHandler extends ResponseEntityExceptionHandler {
 
-
     /**
      * Handles service exceptions
      * @param e
@@ -33,13 +33,10 @@ public class RecrtExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({ RecrtServiceException.class })
     protected ResponseEntity<Object> handleServiceException(RuntimeException e, WebRequest request) {
 
-        RecrtServiceException recrtEx = (RecrtServiceException) e;
-        Error error = recrtEx.getError();
+        RecrtError error = ((RecrtServiceException)e).getError();
 
-        HttpStatus httpStatus;
-        if (error!=null){
-            httpStatus = HttpStatus.valueOf(error.getCode());
-        } else {
+        HttpStatus httpStatus = HttpStatus.valueOf(error.getCode());
+        if (httpStatus == null) {
             httpStatus = HttpStatus.BAD_REQUEST;
         }
 
@@ -76,7 +73,7 @@ public class RecrtExceptionHandler extends ResponseEntityExceptionHandler {
                 fieldErrorResources.add(fieldErrorResource);
             }
 
-            error = new ErrorResource("InvalidRequest", valEx.getMessage());
+            error = new ErrorResource(valEx.getMessage());
             error.setFieldErrors(fieldErrorResources);
         }
 

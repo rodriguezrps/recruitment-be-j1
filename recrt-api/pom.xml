@@ -9,6 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rectrt-api</artifactId>
+    <artifactId>recrt-api</artifactId>
 
 </project>

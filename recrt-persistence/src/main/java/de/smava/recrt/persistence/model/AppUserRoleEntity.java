@@ -2,53 +2,33 @@ package de.smava.recrt.persistence.model;
 
 import de.smava.recrt.model.AppUser;
 import de.smava.recrt.model.AppUserRole;
+import de.smava.recrt.model.UserRole;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "app_user_role")
-public class AppUserRoleEntity implements AppUserRole<AppUserEntity> {
+public class AppUserRoleEntity implements AppUserRole {
 
-    @Id
-    @GenericGenerator(name="id_generator" , strategy="increment")
-    @GeneratedValue(generator="id_generator")
-    private Long id;
+    @EmbeddedId
+    private AppUserRoleKey key;
 
-    @ManyToOne
-    @JoinColumn(name = "app_user_id")
-    private AppUserEntity appUser;
-
-    @Column(name = "name")
-    private String name;
-
-    public AppUserRoleEntity() {}
-
-    public AppUserRoleEntity(long id) {
-        this.id = id;
+    @Override
+    public UserRole getRole() {
+        return key.getRole();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public void setRole(UserRole role) {
+        this.key.setRole(role);
     }
 
     public AppUserEntity getAppUser() {
-        return appUser;
+        return key.getAppUser();
     }
 
     public void setAppUser(AppUserEntity appUser) {
-        this.appUser = appUser;
+        this.key.setAppUser(appUser);
     }
 }

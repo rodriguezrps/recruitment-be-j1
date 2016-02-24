@@ -14,27 +14,20 @@ import java.util.List;
 /**
  *
  */
-@Service
-public class AppUserServiceImpl implements AppUserService<AppUserEntity> {
+@Service("appUserService")
+public class AppUserServiceImpl implements AppUserService {
 
     @Autowired
     private AppUserRepository appUserRepository;
 
     @Override
-    public List<AppUserEntity> getAllAppUsers() throws RecrtServiceException {
+    public List<? extends AppUser> getAll() throws RecrtServiceException {
         return appUserRepository.findAll();
-        // throw new RecrtServiceException(new ErrorResource(HttpStatus.BAD_REQUEST.name(),  "Not implemented!"));
     }
 
     @Override
     @Transactional
-    public AppUserEntity getByUsername(String username) {
-        AppUserEntity appUser = appUserRepository.findByUsername(username);
-        if (appUser == null){
-            return null;
-        }
-
-        appUser.getAppUserRoles();
-        return appUser;
+    public AppUser get(String username) {
+        return appUserRepository.findOne(username);
     }
 }

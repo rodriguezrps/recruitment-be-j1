@@ -12,60 +12,51 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "app_user")
-public class AppUserEntity implements AppUser<AppUserRoleEntity, BankAccountEntity> {
+public class AppUserEntity implements AppUser {
 
-	@Id
-    @GenericGenerator(name="id_generator" , strategy="increment")
-    @GeneratedValue(generator="id_generator")
-    private Long id;
+    @Id
+    private String username;
 
     private String email;
 
-    private String username;
-
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "appUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "key.appUser")
     private Set<AppUserRoleEntity> appUserRoles;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser")
-    private Set<BankAccountEntity> bankAccounts;
 
     public AppUserEntity() {}
 
-    public AppUserEntity(long id) {
+    public AppUserEntity(String username) {
         super();
-        this.id = id;
+        this.username = username;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
 
+    @Override
     public void setUsername(String username) {
         this.username = username;
     }
 
-	public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @Override
     public String getEmail() {
         return email;
     }
 
+    @Override
     public void setEmail(String email) {
         this.email = email;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }
@@ -78,11 +69,4 @@ public class AppUserEntity implements AppUser<AppUserRoleEntity, BankAccountEnti
         this.appUserRoles = appUserRoles;
     }
 
-    public Set<BankAccountEntity> getBankAccounts() {
-        return bankAccounts;
-    }
-
-    public void setBankAccounts(Set<BankAccountEntity> bankAccounts) {
-        this.bankAccounts = bankAccounts;
-    }
 }

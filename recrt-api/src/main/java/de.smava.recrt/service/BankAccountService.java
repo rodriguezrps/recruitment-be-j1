@@ -5,9 +5,9 @@ import de.smava.recrt.model.BankAccount;
 
 import java.util.List;
 
-public interface BankAccountService<T extends BankAccount> {
+public interface BankAccountService {
 
-    List<T> getByAppUser(String appUserName) throws RecrtServiceException;
+    List<? extends BankAccount> getByAppUser(String appUserName) throws RecrtServiceException;
 
-    T create(T account) throws RecrtServiceException;
+    BankAccount create(BankAccount account) throws RecrtServiceException;
 }

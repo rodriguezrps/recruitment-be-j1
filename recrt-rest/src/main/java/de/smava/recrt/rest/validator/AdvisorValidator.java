@@ -1,6 +1,6 @@
 package de.smava.recrt.rest.validator;
 
-import de.smava.recrt.service.resource.AppUserResource;
+import de.smava.recrt.rest.model.AppUserResource;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
