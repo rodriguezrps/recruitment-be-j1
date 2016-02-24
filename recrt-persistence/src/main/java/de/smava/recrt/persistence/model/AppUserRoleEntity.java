@@ -1,9 +1,7 @@
 package de.smava.recrt.persistence.model;
 
-import de.smava.recrt.model.AppUser;
 import de.smava.recrt.model.AppUserRole;
 import de.smava.recrt.model.UserRole;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 

@@ -1,7 +1,6 @@
 package de.smava.recrt.persistence.model;
 
 import de.smava.recrt.model.AppUser;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Set;

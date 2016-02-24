@@ -1,8 +1,8 @@
 package de.smava.recrt.rest.config;
 
-import de.smava.recrt.rest.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -20,21 +20,22 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
+@ComponentScan({"de.smava.recrt.rest.security"})
 @EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
-    LogoutSuccessHandler logoutSuccessHandler;
+    private LogoutSuccessHandler logoutSuccessHandler;
 
     @Autowired
-    AccessDeniedHandler accessDeniedHandler;
+    private AccessDeniedHandler accessDeniedHandler;
 
     @Autowired
-    AuthenticationEntryPoint authenticationEntryPoint;
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -46,12 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
-    }
-
-    @Bean
-    @Override
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
     }
 
     @Override

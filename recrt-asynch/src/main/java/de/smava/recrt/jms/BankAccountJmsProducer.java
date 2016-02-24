@@ -4,7 +4,6 @@ import de.smava.recrt.exception.RecrtError;
 import de.smava.recrt.exception.RecrtServiceException;
 import de.smava.recrt.model.BankAccount;
 import de.smava.recrt.service.BankAccountService;
-import org.apache.activemq.broker.region.Destination;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;

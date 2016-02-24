@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LoginResource {
 
-    String username;
+    private String username;
 
-    String password;
+    private String password;
 
-    boolean loggedIn;
+    private boolean loggedIn;
 
     public LoginResource() {}
 

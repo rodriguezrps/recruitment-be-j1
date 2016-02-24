@@ -13,10 +13,10 @@ public class AppUserRoleKey implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "app_user_username")
-    AppUserEntity appUser;
+    private AppUserEntity appUser;
 
     @Column(name = "role")
-    UserRole role;
+    private UserRole role;
 
     public AppUserRoleKey() {
         super();

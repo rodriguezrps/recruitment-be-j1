@@ -2,7 +2,6 @@ package de.smava.recrt.service.impl;
 
 import de.smava.recrt.exception.RecrtServiceException;
 import de.smava.recrt.model.AppUser;
-import de.smava.recrt.persistence.model.AppUserEntity;
 import de.smava.recrt.persistence.repository.AppUserRepository;
 import de.smava.recrt.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;

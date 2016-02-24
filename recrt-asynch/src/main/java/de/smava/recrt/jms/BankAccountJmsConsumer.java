@@ -15,7 +15,7 @@ import java.util.List;
 @Service("bankAccountJmsConsumer")
 public class BankAccountJmsConsumer implements BankAccountService {
 
-    private static Logger LOG = Logger.getLogger(BankAccountJmsConsumer.class);
+    private static final Logger LOG = Logger.getLogger(BankAccountJmsConsumer.class);
 
     @Autowired
     @Qualifier("bankAccountPersistenceService")
@@ -30,7 +30,7 @@ public class BankAccountJmsConsumer implements BankAccountService {
     @JmsListener(containerFactory = "defaultJmsListenerContainerFactory", destination = Constants.QUEUE_BANK_ACCOUNT_CREATE)
     public BankAccount create(BankAccount account) throws RecrtServiceException {
         LOG.warn("Received " + account);
-        BankAccount saved = bankAccountService.create(account);
+        bankAccountService.create(account);
         return null;
     }
 }

@@ -4,7 +4,6 @@ import de.smava.recrt.jms.Constants;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
@@ -17,7 +16,6 @@ import javax.jms.Session;
 
 @Configuration
 @EnableJms
-@ComponentScan("de.smava.recrt.jms")
 public class JmsConfig {
 
     @Bean

@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -31,7 +30,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class PersistenceConfig {
 
-    private static Logger LOG = Logger.getLogger(PersistenceConfig.class);
+    private static final Logger LOG = Logger.getLogger(PersistenceConfig.class);
 
     private EmbeddedDatabase embeddedDb;
 
@@ -94,7 +93,7 @@ public class PersistenceConfig {
     }
 
 
-    DataSource getDataSource() {
+    private DataSource getDataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         embeddedDb = builder.setType(EmbeddedDatabaseType.H2)
                 .addScript("sql/init.sql")
@@ -102,14 +101,14 @@ public class PersistenceConfig {
         return embeddedDb;
     }
 
-    JpaVendorAdapter getJpaVendorAdapter() {
+    private JpaVendorAdapter getJpaVendorAdapter() {
         HibernateJpaVendorAdapter adaptor = new HibernateJpaVendorAdapter();
         adaptor.setDatabase(Database.H2);
         adaptor.setDatabasePlatform("org.hibernate.dialect.H2Dialect");
         return adaptor;
     }
 
-    Properties getJpaProperties(){
+    private Properties getJpaProperties(){
         Properties ps = new Properties();
         ps.put("hibernate.default_schema", hibernateSchema);
         ps.put("hibernate.dialect", hibernateDialect);

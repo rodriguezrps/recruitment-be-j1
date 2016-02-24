@@ -1,15 +1,14 @@
 package de.smava.recrt.rest.model;
 
-import de.smava.recrt.model.AppUser;
 import de.smava.recrt.model.BankAccount;
 
 public class BankAccountResource extends DefaultResource implements BankAccount<AppUserResource> {
 
-    String iban;
+    private String iban;
 
-    String bic;
+    private String bic;
 
-    AppUserResource appUser;
+    private AppUserResource appUser;
 
     public BankAccountResource() {
         super();

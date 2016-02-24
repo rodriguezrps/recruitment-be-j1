@@ -2,10 +2,6 @@ package de.smava.recrt.rest.security;
 
 import de.smava.recrt.model.AppUser;
 import de.smava.recrt.model.AppUserRole;
-import de.smava.recrt.persistence.model.AppUserEntity;
-import de.smava.recrt.persistence.model.AppUserRoleEntity;
-import de.smava.recrt.persistence.repository.AppUserRepository;
-import de.smava.recrt.persistence.repository.AppUserRoleRepository;
 import de.smava.recrt.service.AppUserRoleService;
 import de.smava.recrt.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +15,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    AppUserService appUserService;
+    private AppUserService appUserService;
 
     @Autowired
-    AppUserRoleService appUserRolesService;
+    private AppUserRoleService appUserRolesService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

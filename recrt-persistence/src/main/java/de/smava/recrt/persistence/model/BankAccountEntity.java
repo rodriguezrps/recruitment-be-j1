@@ -1,6 +1,5 @@
 package de.smava.recrt.persistence.model;
 
-import de.smava.recrt.model.AppUser;
 import de.smava.recrt.model.BankAccount;
 
 import javax.persistence.*;
@@ -11,10 +10,10 @@ public class BankAccountEntity implements BankAccount<AppUserEntity> {
 
     @Id
     @Column(name = "iban")
-    String iban;
+    private String iban;
 
     @Column(name = "bic")
-    String bic;
+    private String bic;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "app_user_username")
