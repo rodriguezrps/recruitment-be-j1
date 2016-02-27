@@ -11,13 +11,19 @@ public class LoginResource {
 
     private String password;
 
-    private boolean loggedIn;
+    private Boolean loggedIn;
 
     public LoginResource() {}
 
-    public LoginResource(boolean loggedIn, String username) {
+    public LoginResource(Boolean loggedIn, String username) {
         this.loggedIn = loggedIn;
         this.username = username;
+    }
+
+    public LoginResource(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.loggedIn = null;
     }
 
     public String getUsername() {
@@ -36,11 +42,11 @@ public class LoginResource {
         this.password = password;
     }
 
-    public boolean isLoggedIn() {
+    public Boolean isLoggedIn() {
         return loggedIn;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
+    public void setLoggedIn(Boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
 }

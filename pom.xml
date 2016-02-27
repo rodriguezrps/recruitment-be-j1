@@ -28,6 +28,7 @@
         <jackson.databind.version>2.3.2</jackson.databind.version>
         <slf4j-log4j12.version>1.7.12</slf4j-log4j12.version>
         <junit.version>4.9</junit.version>
+        <easymock.version>3.4</easymock.version>
     </properties>
 
     <dependencyManagement>
@@ -138,6 +139,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${easymock.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
