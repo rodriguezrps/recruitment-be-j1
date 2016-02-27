@@ -4,9 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by paul on 27/02/16.
- */
 public class AppUserApiTest {
 
     @Test
