@@ -52,7 +52,7 @@ public class LoginApiTest {
         appUser.setUsername("user1");
         appUser.setPassword("1111");
 
-        expect(appUserService.get(anyString())).andReturn(appUser).anyTimes();
+        expect(appUserService.get(anyString())).andReturn(appUser).once();
         replay(appUserService);
 
         ObjectMapper mapper = new ObjectMapper();
@@ -64,8 +64,8 @@ public class LoginApiTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        String content = result.getResponse().getContentAsString();
-
-        assertEquals("",content);
+        assertEquals(
+                mapper.writeValueAsString(new LoginResource(true, "user1")) ,
+                result.getResponse().getContentAsString());
     }
 }
