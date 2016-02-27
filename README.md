@@ -135,7 +135,7 @@ minimum effort, convert this into an asynchronous call.
 **de.smava.recrt.rest.AppUserApi** implementation that gets the bank accounts that belong to a specific user. 
 The method should only be callable by a user who has the **ROLE_ADMIN** role.
 
-    ETC: 20 mins.
+    ETC: 30 mins.
 
 1. Complete the **recrt-persistence** package unit tests
 
@@ -145,3 +145,4 @@ The method should only be callable by a user who has the **ROLE_ADMIN** role.
 
     ETC: 30 mins.
 
+1. Other tasks?...
