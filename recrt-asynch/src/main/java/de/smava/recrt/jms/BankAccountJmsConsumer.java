@@ -11,6 +11,7 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Queue;
 
 @Service("bankAccountJmsConsumer")
 public class BankAccountJmsConsumer implements BankAccountService {
@@ -21,6 +22,8 @@ public class BankAccountJmsConsumer implements BankAccountService {
     @Qualifier("bankAccountPersistenceService")
     private BankAccountService bankAccountService;
 
+    private BankAccount lastReceived;
+
     @Override
     public List<? extends BankAccount> getByAppUser(String appUserName) throws RecrtServiceException {
         throw new RecrtServiceException(new RecrtError("No asynchronous service to get bank account by user."));
@@ -30,7 +33,15 @@ public class BankAccountJmsConsumer implements BankAccountService {
     @JmsListener(containerFactory = "defaultJmsListenerContainerFactory", destination = Constants.QUEUE_BANK_ACCOUNT_CREATE)
     public BankAccount create(BankAccount account) throws RecrtServiceException {
         LOG.warn("Received " + account);
-        bankAccountService.create(account);
-        return null;
+        setLastReceived(account);
+        return bankAccountService.create(account);
+    }
+
+    public synchronized BankAccount getLastReceived() {
+        return lastReceived;
+    }
+
+    public synchronized void setLastReceived(BankAccount lastReceived) {
+        this.lastReceived = lastReceived;
     }
 }

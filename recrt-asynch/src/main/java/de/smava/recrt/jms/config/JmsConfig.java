@@ -1,6 +1,7 @@
 package de.smava.recrt.jms.config;
 
 import de.smava.recrt.jms.Constants;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,7 @@ public class JmsConfig {
     public JmsTemplate getJmsTemplate(){
         JmsTemplate template = new JmsTemplate();
         template.setConnectionFactory(connectionFactory());
-        template.setDefaultDestination(new ActiveMQTopic(Constants.QUEUE_BANK_ACCOUNT_CREATE));
+        template.setDefaultDestination(new ActiveMQQueue(Constants.TOPIC_DEFAULT));
         template.setExplicitQosEnabled(true);
         template.setDeliveryPersistent(false);
         template.setTimeToLive(60000);
@@ -37,7 +38,7 @@ public class JmsConfig {
     public DefaultJmsListenerContainerFactory defaultJmsListenerContainerFactory() {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory());
-        factory.setPubSubDomain(true);
+        factory.setPubSubDomain(false);
         factory.setDestinationResolver(new DynamicDestinationResolver());
         factory.setConcurrency("1");
         factory.setMessageConverter(getMessageConverter());
