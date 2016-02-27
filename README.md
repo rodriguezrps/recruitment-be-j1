@@ -139,7 +139,9 @@ The method should only be callable by a user who has the **ROLE_ADMIN** role.
 
 1. Complete the **recrt-persistence** package unit tests
 
-    ETC: 20 mins.
+    ETC: 30 mins.
     
-1. Other tasks....
+1. Complete the **recrt-service** package unit tests
+
+    ETC: 30 mins.
 
