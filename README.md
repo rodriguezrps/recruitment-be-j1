@@ -122,11 +122,11 @@ and push your changes to the remote repository.
 ## Tasks
 
 1. Currently the **create account API** executes synchronously. By using the available implementation and 
-only changing a single line of code convert this into an asynchronous call. 
+minimum effort, convert this into an asynchronous call. 
 
     ETC: 15 mins.
 
-1. By implementing a single line of code, introduce caching for the 
+1. With minimum effort, introduce caching for the 
 **de.smava.recrt.service.AppUserRoleService.getByAppUser** service.
 
     ETC: 15 mins.
@@ -137,5 +137,9 @@ The method should only be callable by a user who has the **ROLE_ADMIN** role.
 
     ETC: 20 mins.
 
-1. Create a unit test for.....
+1. Complete the **recrt-persistence** package unit tests
+
+    ETC: 20 mins.
+    
+1. Other tasks....
 

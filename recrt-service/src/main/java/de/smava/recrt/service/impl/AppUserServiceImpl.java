@@ -10,9 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- *
- */
 @Service("appUserService")
 public class AppUserServiceImpl implements AppUserService {
 
