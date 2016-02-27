@@ -137,11 +137,11 @@ The method should only be callable by a user who has the **ROLE_ADMIN** role.
 
     ETC: 30 mins.
 
-1. Without adding any new libararies to the project complete the **recrt-persistence** package unit tests
+1. Without adding any new libraries to the project, complete the **recrt-persistence** package unit tests
 
     ETC: 30 mins.
     
-1. Without adding any new libararies to the project complete the **recrt-service** package unit tests
+1. Without adding any new libraries to the project, complete the **recrt-service** package unit tests
 
     ETC: 30 mins.
 
