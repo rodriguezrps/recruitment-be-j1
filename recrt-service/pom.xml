@@ -20,7 +20,7 @@
         <dependency>
             <groupId>de.smava.recrt</groupId>
             <artifactId>recrt-persistence</artifactId>
-            <version>0.01-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
