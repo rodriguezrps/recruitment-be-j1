@@ -11,7 +11,6 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Queue;
 
 @Service("bankAccountJmsConsumer")
 public class BankAccountJmsConsumer implements BankAccountService {

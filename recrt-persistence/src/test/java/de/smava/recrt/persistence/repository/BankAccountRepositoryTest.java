@@ -1,6 +1,5 @@
 package de.smava.recrt.persistence.repository;
 
-import de.smava.recrt.model.BankAccount;
 import de.smava.recrt.persistence.config.PersistenceConfig;
 import de.smava.recrt.persistence.model.AppUserEntity;
 import de.smava.recrt.persistence.model.BankAccountEntity;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
-import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = PersistenceConfig.class)

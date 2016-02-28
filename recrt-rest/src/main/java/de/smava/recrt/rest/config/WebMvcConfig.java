@@ -20,7 +20,6 @@ import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 /**

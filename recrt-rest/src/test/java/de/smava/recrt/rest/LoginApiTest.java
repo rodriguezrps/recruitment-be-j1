@@ -5,7 +5,6 @@ import de.smava.recrt.model.AppUser;
 import de.smava.recrt.persistence.model.AppUserEntity;
 import de.smava.recrt.rest.config.SecurityConfig;
 import de.smava.recrt.rest.config.WebMvcConfig;
-import de.smava.recrt.rest.model.AppUserResource;
 import de.smava.recrt.rest.model.LoginResource;
 import de.smava.recrt.service.AppUserService;
 import org.junit.Before;
