@@ -121,8 +121,9 @@ and push your changes to the remote repository.
 
 ## Tasks
 
-1. Currently the **create bank account API** executes synchronously. By using the available implementation and
-minimum effort, convert this into an asynchronous call. 
+1. By using the available implementation and minimum implementation effort, introduce a third layer between the
+web and persistence layers for the **create bank account API** so that the create account function is load balanced 
+via the use of JMS. 
 
     ETC: 15 mins.
 
