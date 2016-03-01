@@ -22,7 +22,9 @@ public class RecrtValidationException extends RuntimeException {
         this.errorResource = errorResource;
     }
 
-    public Errors getErrors() { return errors; }
+    public Errors getErrors() {
+        return errors;
+    }
 
     public ErrorResource getErrorResource() {
         return errorResource;

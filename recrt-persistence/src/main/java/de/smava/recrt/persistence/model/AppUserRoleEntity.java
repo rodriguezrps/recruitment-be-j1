@@ -3,7 +3,9 @@ package de.smava.recrt.persistence.model;
 import de.smava.recrt.model.AppUserRole;
 import de.smava.recrt.model.UserRole;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "app_user_role")

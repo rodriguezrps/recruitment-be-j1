@@ -16,17 +16,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {JmsConfig.class})
 public class BankAccountJmsServiceTest {
 
     @Configuration
-    static class TestConfig{
+    static class TestConfig {
 
         @Bean(name = "appUserService")
         public AppUserService getAppUserService() {
@@ -72,8 +70,8 @@ public class BankAccountJmsServiceTest {
         Thread.sleep(512);
 
         assertEquals(bankAccount2.getIban(),
-                ((BankAccountJmsConsumer)bankAccountConsumer).getLastReceived().getIban());
+                ((BankAccountJmsConsumer) bankAccountConsumer).getLastReceived().getIban());
         assertEquals(bankAccount2.getBic(),
-                ((BankAccountJmsConsumer)bankAccountConsumer).getLastReceived().getBic());
+                ((BankAccountJmsConsumer) bankAccountConsumer).getLastReceived().getBic());
     }
 }

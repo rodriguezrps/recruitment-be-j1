@@ -15,7 +15,7 @@ public class ErrorResource extends RecrtError {
 
     private List<FieldErrorResource> fieldErrors;
 
-    public ErrorResource(){
+    public ErrorResource() {
         super(422, "Validation error.");
     }
 
@@ -27,15 +27,25 @@ public class ErrorResource extends RecrtError {
         super(code, message);
     }
 
-    public int getCode() { return code; }
+    public int getCode() {
+        return code;
+    }
 
-    public void setCode(int code) { this.code = code; }
+    public void setCode(int code) {
+        this.code = code;
+    }
 
-    public String getMessage() { return message; }
+    public String getMessage() {
+        return message;
+    }
 
-    public void setMessage(String message) { this.message = message; }
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-    public List<FieldErrorResource> getFieldErrors() { return fieldErrors; }
+    public List<FieldErrorResource> getFieldErrors() {
+        return fieldErrors;
+    }
 
     public void setFieldErrors(List<FieldErrorResource> fieldErrors) {
         this.fieldErrors = fieldErrors;

@@ -56,7 +56,7 @@ public class LoginApiTest {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        MvcResult result =mockMvc.perform(post("/rest/login")
+        MvcResult result = mockMvc.perform(post("/rest/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new LoginResource("user1", "1111"))))
                 .andDo(print())
@@ -64,7 +64,7 @@ public class LoginApiTest {
                 .andReturn();
 
         assertEquals(
-                mapper.writeValueAsString(new LoginResource(true, "user1")) ,
+                mapper.writeValueAsString(new LoginResource(true, "user1")),
                 result.getResponse().getContentAsString());
     }
 }

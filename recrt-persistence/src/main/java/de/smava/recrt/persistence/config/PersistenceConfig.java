@@ -26,7 +26,7 @@ import java.util.Properties;
  * Created by pvitic on 11.05.15.
  */
 @Configuration
-@EnableJpaRepositories(basePackages={"de.smava.recrt.persistence.repository"})
+@EnableJpaRepositories(basePackages = {"de.smava.recrt.persistence.repository"})
 @EnableTransactionManagement
 public class PersistenceConfig {
 
@@ -54,7 +54,7 @@ public class PersistenceConfig {
 
     @Value("${hibernate.hbm2ddl.auto}")
     private String hibernateHbm2ddlAuto;
-    
+
     @Value("${hibernate.default_schema}")
     private String hibernateSchema;
 
@@ -65,19 +65,19 @@ public class PersistenceConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(){
+    public PlatformTransactionManager transactionManager() {
         JpaTransactionManager tm = new JpaTransactionManager();
         tm.setEntityManagerFactory(this.entityManagerFactory().getObject());
         return tm;
     }
 
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
         LocalContainerEntityManagerFactoryBean factory
                 = new LocalContainerEntityManagerFactoryBean();
@@ -108,7 +108,7 @@ public class PersistenceConfig {
         return adaptor;
     }
 
-    private Properties getJpaProperties(){
+    private Properties getJpaProperties() {
         Properties ps = new Properties();
         ps.put("hibernate.default_schema", hibernateSchema);
         ps.put("hibernate.dialect", hibernateDialect);

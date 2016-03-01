@@ -36,7 +36,7 @@ public class AppUserApi {
         List<AppUserResource> result = new ArrayList<>();
 
         List<? extends AppUser> userEntities = appUserService.getAll();
-        for(AppUser userEntity : userEntities){
+        for (AppUser userEntity : userEntities) {
             result.add(new AppUserResource(userEntity));
         }
 

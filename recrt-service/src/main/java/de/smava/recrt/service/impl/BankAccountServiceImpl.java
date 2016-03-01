@@ -28,7 +28,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     @Transactional
     public List<? extends BankAccount> getByAppUser(String appUserName) throws RecrtServiceException {
         AppUserEntity user = appUserRepository.findOne(appUserName);
-        if (user!=null){
+        if (user != null) {
             return bankAccountRepository.findByAppUser(user);
         }
         return new ArrayList<>();
@@ -39,10 +39,10 @@ public class BankAccountServiceImpl implements BankAccountService {
     public BankAccount create(BankAccount account) throws RecrtServiceException {
         AppUser user = account.getAppUser();
         // TODO throw exception
-        if (user!=null){
+        if (user != null) {
             AppUserEntity userEntity = appUserRepository.findOne(account.getAppUser().getUsername());
 
-            if (userEntity!=null) {
+            if (userEntity != null) {
                 BankAccountEntity target = new BankAccountEntity(account.getIban(), account.getBic(), userEntity);
                 return bankAccountRepository.save(target);
             }

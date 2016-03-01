@@ -36,7 +36,8 @@ public class AppUserResource extends DefaultResource implements AppUser {
     }
 
     @Override
-    public void setPassword(String password) {}
+    public void setPassword(String password) {
+    }
 
     public String getEmail() {
         return email;

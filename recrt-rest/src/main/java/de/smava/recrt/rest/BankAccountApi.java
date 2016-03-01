@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +38,7 @@ public class BankAccountApi {
         List<BankAccountResource> result = new ArrayList<>();
 
         List<? extends BankAccount> bankAccountEntities = bankAccountService.getByAppUser(name);
-        for (BankAccount bankAccountEntity : bankAccountEntities){
+        for (BankAccount bankAccountEntity : bankAccountEntities) {
             result.add(new BankAccountResource(bankAccountEntity));
         }
         return result;
@@ -45,7 +48,7 @@ public class BankAccountApi {
     @RequestMapping(method = RequestMethod.POST)
     public BankAccountResource create(@RequestBody BankAccountResource account) throws RecrtServiceException {
         BankAccount saved = bankAccountService.create(account);
-        if (saved!=null){
+        if (saved != null) {
             return new BankAccountResource(saved);
         }
         return null;

@@ -17,7 +17,7 @@ public class BankAccountResource extends DefaultResource implements BankAccount<
     public BankAccountResource(BankAccount bankAccount) {
         this.iban = bankAccount.getIban();
         this.bic = bankAccount.getBic();
-        if (bankAccount.getAppUser()!=null){
+        if (bankAccount.getAppUser() != null) {
             this.appUser = new AppUserResource(bankAccount.getAppUser());
         }
     }

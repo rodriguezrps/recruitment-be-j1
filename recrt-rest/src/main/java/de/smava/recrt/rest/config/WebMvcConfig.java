@@ -60,8 +60,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean(name = "messageSource")
-    public MessageSource configureMessageSource()
-    {
+    public MessageSource configureMessageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:messages");
         messageSource.setCacheSeconds(5);
@@ -70,7 +69,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public MappingJackson2HttpMessageConverter httpMessageConverter(){
+    public MappingJackson2HttpMessageConverter httpMessageConverter() {
         return new MappingJackson2HttpMessageConverter();
     }
 

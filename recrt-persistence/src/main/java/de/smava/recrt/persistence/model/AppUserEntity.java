@@ -23,7 +23,8 @@ public class AppUserEntity implements AppUser {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "key.appUser")
     private Set<AppUserRoleEntity> appUserRoles;
 
-    public AppUserEntity() {}
+    public AppUserEntity() {
+    }
 
     public AppUserEntity(String username) {
         super();

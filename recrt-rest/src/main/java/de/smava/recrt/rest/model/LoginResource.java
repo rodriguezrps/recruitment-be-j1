@@ -13,7 +13,8 @@ public class LoginResource {
 
     private Boolean loggedIn;
 
-    public LoginResource() {}
+    public LoginResource() {
+    }
 
     public LoginResource(Boolean loggedIn, String username) {
         this.loggedIn = loggedIn;

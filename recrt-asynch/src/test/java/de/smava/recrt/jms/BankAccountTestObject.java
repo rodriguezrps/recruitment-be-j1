@@ -3,7 +3,7 @@ package de.smava.recrt.jms;
 import de.smava.recrt.model.AppUser;
 import de.smava.recrt.model.BankAccount;
 
-public class BankAccountTestObject implements BankAccount{
+public class BankAccountTestObject implements BankAccount {
 
     private String iban;
     private String bic;

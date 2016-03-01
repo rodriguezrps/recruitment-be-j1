@@ -30,7 +30,7 @@ public class BankAccountJmsProducer implements BankAccountService {
 
     @Override
     public BankAccount create(BankAccount account) throws RecrtServiceException {
-        if (this.destination == null){
+        if (this.destination == null) {
             this.destination = new ActiveMQQueue(Constants.QUEUE_BANK_ACCOUNT_CREATE);
         }
         template.convertAndSend(destination, account);

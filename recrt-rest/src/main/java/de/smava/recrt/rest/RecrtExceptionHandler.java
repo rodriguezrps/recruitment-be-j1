@@ -26,14 +26,15 @@ public class RecrtExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * Handles service exceptions
+     *
      * @param e
      * @param request
      * @return
      */
-    @ExceptionHandler({ RecrtServiceException.class })
+    @ExceptionHandler({RecrtServiceException.class})
     protected ResponseEntity<Object> handleServiceException(RuntimeException e, WebRequest request) {
 
-        RecrtError error = ((RecrtServiceException)e).getError();
+        RecrtError error = ((RecrtServiceException) e).getError();
 
         HttpStatus httpStatus = HttpStatus.valueOf(error.getCode());
         if (httpStatus == null) {
@@ -47,20 +48,20 @@ public class RecrtExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-
     /**
      * Handles validation exceptions
+     *
      * @param e
      * @param request
      * @return
      */
-    @ExceptionHandler({ RecrtValidationException.class })
+    @ExceptionHandler({RecrtValidationException.class})
     protected ResponseEntity<Object> handleValidationException(RuntimeException e, WebRequest request) {
 
         RecrtValidationException valEx = (RecrtValidationException) e;
         ErrorResource error = valEx.getErrorResource();
 
-        if (error==null) {
+        if (error == null) {
             List<FieldErrorResource> fieldErrorResources = new ArrayList<>();
 
             List<FieldError> fieldErrors = valEx.getErrors().getFieldErrors();

@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Embeddable
-public class AppUserRoleKey implements Serializable{
+public class AppUserRoleKey implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "app_user_username")

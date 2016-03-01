@@ -28,22 +28,22 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser appUser = appUserService.get(username);
-        if (appUser == null){
+        if (appUser == null) {
             throw new UsernameNotFoundException(username);
         }
         List<GrantedAuthority> authorities = getRoles(appUser);
         return new User(appUser.getUsername(), appUser.getPassword(), authorities);
     }
 
-    private List<GrantedAuthority> getRoles(AppUser appUser){
+    private List<GrantedAuthority> getRoles(AppUser appUser) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         List<? extends AppUserRole> roles = appUserRolesService.getByAppUser(appUser);
-        if (roles !=null && !roles.isEmpty()){
-            for (AppUserRole role : roles){
+        if (roles != null && !roles.isEmpty()) {
+            for (AppUserRole role : roles) {
                 SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getRole().name());
                 authorities.add(authority);
             }
         }
-        return  authorities;
+        return authorities;
     }
 }

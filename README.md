@@ -121,7 +121,7 @@ and push your changes to the remote repository.
 
 ## Tasks
 
-1. Currently the **create account API** executes synchronously. By using the available implementation and 
+1. Currently the **create bank account API** executes synchronously. By using the available implementation and
 minimum effort, convert this into an asynchronous call. 
 
     ETC: 15 mins.

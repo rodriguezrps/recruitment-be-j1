@@ -2,7 +2,6 @@ package de.smava.recrt.jms.config;
 
 import de.smava.recrt.jms.Constants;
 import org.apache.activemq.command.ActiveMQQueue;
-import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,7 +21,7 @@ import javax.jms.Session;
 public class JmsConfig {
 
     @Bean
-    public JmsTemplate getJmsTemplate(){
+    public JmsTemplate getJmsTemplate() {
         JmsTemplate template = new JmsTemplate();
         template.setConnectionFactory(connectionFactory());
         template.setDefaultDestination(new ActiveMQQueue(Constants.TOPIC_DEFAULT));
@@ -51,7 +50,7 @@ public class JmsConfig {
         return factory;
     }
 
-    private MessageConverter getMessageConverter(){
+    private MessageConverter getMessageConverter() {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTypeIdPropertyName("JMSType");
         return converter;

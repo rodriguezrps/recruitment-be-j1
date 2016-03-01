@@ -9,7 +9,7 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DefaultResource {
 
-    private Map<String,Object> additionalInfo;
+    private Map<String, Object> additionalInfo;
 
     public Map<String, Object> getAdditionalInfo() {
         return additionalInfo;
