@@ -17,6 +17,7 @@ public class AppUserServiceImpl implements AppUserService {
     private AppUserRepository appUserRepository;
 
     @Override
+    @Transactional
     public List<? extends AppUser> getAll() throws RecrtServiceException {
         return appUserRepository.findAll();
     }
