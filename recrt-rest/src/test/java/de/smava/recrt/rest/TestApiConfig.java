@@ -20,7 +20,7 @@ public class TestApiConfig {
         return EasyMock.mock(AppUserRoleService.class);
     }
 
-    @Bean(name = "bankAccountPersistenceService")
+    @Bean(name = "bankAccountJmsProducer")
     public BankAccountService getBankAccountService() {
         return EasyMock.mock(BankAccountService.class);
     }

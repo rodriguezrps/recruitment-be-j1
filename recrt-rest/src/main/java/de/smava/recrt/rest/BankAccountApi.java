@@ -24,7 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class BankAccountApi {
 
     @Autowired
-    @Qualifier("bankAccountPersistenceService")
+    @Qualifier("bankAccountJmsProducer")
     private BankAccountService bankAccountService;
 
 
